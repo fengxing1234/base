@@ -1,6 +1,72 @@
 //打包发布
 apply plugin: 'maven-publish'
-MAVEN_ARTIFACTID = 'base'
+MavenArtifactid = 'base'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = MavenGroupId
+                artifactId = MavenArtifactid
+                version = MavenisSnapshot.toBoolean() ? MavenVersion + '-SNAPSHOT' : MavenVersion
+            }
+            debug(MavenPublication) {
+                from components.debug
+                groupId = MavenGroupId
+                artifactId = MavenArtifactid
+                version = MavenisSnapshot.toBoolean() ? MavenVersion + '-SNAPSHOT' : MavenVersion
+            }
+        }
+        repositories {
+            maven {
+                name = "development"
+                allowInsecureProtocol true
+                url = MavenisSnapshot.toBoolean() ? MavenSnapshotRepositoryURL : MavenReleaseRepositoryURL
+                credentials {
+                    username = MavenUserName
+                    password = MavenPassWord
+                }
+            }
+        }
+    }
+}
+
+
+/////////////////////////////////////////////////3.6版本以前/////////////////////////////////////////////////
+//apply plugin: 'maven'
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            // 是否快照版本
+//            def isSnapShot = MavenisSnapshot.toBoolean()
+//            def versionName = MavenVersion
+//            if (isSnapShot) {
+//                versionName += "-SNAPSHOT"
+//            }
+//            // 组件信息
+//            pom.groupId = MavenGroupId
+//            pom.artifactId = MavenArtifactid
+//            pom.version = versionName
+//
+//            // 快照仓库路径
+//            snapshotRepository(url: uri(MavenSnapshotRepositoryURL)) {
+//                authentication(userName: MavenUserName, password: MavenPassWord)
+//            }
+//            // 发布仓库路径
+//            repository(url: uri(MavenReleaseRepositoryURL)) {
+//                authentication(userName: MavenUserName, password: MavenPassWord)
+//            }
+//
+//            println("###################################"
+//                    + "\nuploadArchives = " + pom.groupId + ":" + pom.artifactId + ":" + pom.version + "." + pom.packaging
+//                    + "\nrepository =" + (isSnapShot ? MavenSnapshotRepositoryURL : MavenReleaseRepositoryURL)
+//                    + "\n###################################"
+//            )
+//        }
+//    }
+//}
+
+
 // type显示指定任务类型或任务, 这里指定要执行Javadoc这个task,这个task在gradle中已经定义
 task androidJavadocs(type: Javadoc) {
     // 设置源码所在的位置
@@ -25,97 +91,3 @@ artifacts {
     archives androidSourcesJar
     archives androidJavadocsJar
 }
-
-def mapRepositoryURL = 'http://127.0.0.1:8081/repository/map/'
-def snapshotRepositoryURL = "http://127.0.0.1:8081/repository/map-snapshot/"
-def releaseRepositoryURL = "http://127.0.0.1:8081/repository/map-release/"
-
-def UserName = "admin"
-def Password = "0a89a116-65a6-4b5c-86da-6200f2415e4f"
-
-def Version = '1.0.1'
-def GroupId = 'com.zhyen.base'
-
-
-afterEvaluate {
-    publishing {
-        publications {
-            // Creates a Maven publication called "release".
-            release(MavenPublication) {
-                // Applies the component for the release build variant.
-                from components.release
-
-                // You can then customize attributes of the publication as shown below.
-                groupId = 'com.zhyen.map'
-                artifactId = 'base'
-                version = Version
-            }
-            // Creates a Maven publication called “debug”.
-            debug(MavenPublication) {
-                // Applies the component for the debug build variant.
-                from components.debug
-
-                groupId = 'com.zhyen.map'
-                artifactId = 'base-debug'
-                version = Version
-            }
-        }
-        repositories {
-            maven {
-                name = "development"
-                //允许非https链接
-                allowInsecureProtocol true
-                url = mapRepositoryURL
-                //url = version.endsWith('SNAPSHOT') ? snapshotRepositoryURL : releaseRepositoryURL
-
-                credentials {
-                    username = UserName
-                    password = Password
-                }
-            }
-//            maven {
-//                name = "snapshot"
-//                allowInsecureProtocol true
-//                url = snapshotRepositoryURL
-//                credentials {
-//                    username = UserName
-//                    password = Password
-//                }
-//            }
-        }
-    }
-}
-/////////////////////////////////////////////////3.6版本以前/////////////////////////////////////////////////
-//apply plugin: 'maven'
-//MAVEN_ARTIFACTID = 'base'
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            // 是否快照版本
-//            def isSnapShot = Boolean.valueOf(MavenisSnapshot)
-//            def versionName = MavenVersion
-//            if (isSnapShot) {
-//                versionName += "-SNAPSHOT"
-//            }
-//            // 组件信息
-//            pom.groupId = MAVEN_ARTIFACTID
-//            pom.artifactId = MAVEN_ARTIFACTID
-//            pom.version = versionName
-//
-//            // 快照仓库路径
-//            snapshotRepository(url: uri(MavenSnapshotRepositoryURL)) {
-//                authentication(userName: MavenUserName, password: MavenPassWord)
-//            }
-//            // 发布仓库路径
-//            repository(url: uri(MavenReleaseRepositoryURL)) {
-//                authentication(userName: MavenUserName, password: MavenPassWord)
-//            }
-//
-//            println("###################################"
-//                    + "\nuploadArchives = " + pom.groupId + ":" + pom.artifactId + ":" + pom.version + "." + pom.packaging
-//                    + "\nrepository =" + (isSnapshot ? MAVEN_SNAPSHOT_URL : MAVEN_RELEASE_URL)
-//                    + "\n###################################"
-//            )
-//        }
-//    }
-//}
