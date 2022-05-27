@@ -1,0 +1,44 @@
+ext {
+
+    isApplication = false  //false:作为Lib组件存在， true:作为application存在
+    isAndroidApplication = false  //玩Android模块开关，false:作为Lib组件存在， true:作为application存在
+    isLoveApplication = false  //爱意表达模块开关，false:作为Lib组件存在， true:作为application存在
+    isVideoApplication = false  //视频模块开关，false:作为Lib组件存在， true:作为application存在
+    isNoteApplication = false  //记事本模块开关，false:作为Lib组件存在， true:作为application存在
+    isBookApplication = false  //book模块开关，false:作为Lib组件存在， true:作为application存在
+    isDouBanApplication = false  //豆瓣模块开关，false:作为Lib组件存在， true:作为application存在
+    isGankApplication = false  //干货模块开关，false:作为Lib组件存在， true:作为application存在
+    isMusicApplication = false  //音乐模块开关，false:作为Lib组件存在， true:作为application存在
+    isNewsApplication = false  //新闻模块开关，false:作为Lib组件存在， true:作为application存在
+    isToDoApplication = false  //todo模块开关，false:作为Lib组件存在， true:作为application存在
+    isZhiHuApplication = false  //知乎模块开关，false:作为Lib组件存在， true:作为application存在
+    isOtherApplication = false  //其他模块开关，false:作为Lib组件存在， true:作为application存在
+
+    android = [
+            compileSdkVersion       : 28,
+            buildToolsVersion       : "28.0.3",
+            minSdkVersion           : 17,
+            targetSdkVersion        : 28,
+            versionCode             : 22,
+            versionName             : "1.8.2"    //必须是int或者float，否则影响线上升级
+    ]
+
+    version = [
+            androidSupportSdkVersion: "28.0.0",
+            retrofitSdkVersion      : "2.4.0",
+            glideSdkVersion         : "4.8.0",
+            canarySdkVersion        : "1.5.4",
+            constraintVersion       : "1.0.2"
+    ]
+
+    dependencies = [
+            //support
+            "appcompat-v7"             : "com.android.support:appcompat-v7:${version["androidSupportSdkVersion"]}",
+            "multidex"                 : "com.android.support:multidex:1.0.1",
+            //network
+            "retrofit"                 : "com.squareup.retrofit2:retrofit:${version["retrofitSdkVersion"]}",
+            "retrofit-converter-gson"  : "com.squareup.retrofit2:converter-gson:${version["retrofitSdkVersion"]}",
+            "retrofit-adapter-rxjava"  : "com.squareup.retrofit2:adapter-rxjava2:${version["retrofitSdkVersion"]}",
+            //这里省略一部分代码
+    ]
+}

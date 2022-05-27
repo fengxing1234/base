@@ -1,12 +1,11 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
 }
 
 android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.zhyen.common"
         minSdk 21
         targetSdk 32
         versionCode 1
@@ -38,4 +37,5 @@ dependencies {
 //    api 'com.alibaba:arouter-api:x.x.x'
 //    annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
 
+    api 'com.zhyen.map:base:1.0.0'
 }
