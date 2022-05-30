@@ -13,9 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 public class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
+    protected boolean isThemeDefault = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // TODO: 2022/5/27 主题动态切换
+        setTheme(isThemeDefault ? com.map.base.ui.R.style.AppTheme : com.map.base.ui.R.style.AppDarkTheme);
     }
 }

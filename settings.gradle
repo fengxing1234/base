@@ -16,6 +16,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Base"
 include ':app'
-include ':base'
-
 include ':common'
+include ':base:ui'
+include ':base:tool'
+include ':base:db'
+include ':base:http'
