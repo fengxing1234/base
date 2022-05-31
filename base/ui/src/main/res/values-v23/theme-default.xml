@@ -16,8 +16,11 @@
         <!-- 状态栏文字颜色，API23可用-->
         <item name="android:windowLightStatusBar">true</item>
         <!--状态栏颜色-->
-        <item name="android:statusBarColor">#00000000</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <!-- 状态栏透明化 -->
-        <item name="android:windowTranslucentStatus">true</item>
+        <!--        <item name="android:windowTranslucentStatus">true</item>-->
+        <!--        底部导航栏的颜色-->
+        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+
     </style>
 </resources>

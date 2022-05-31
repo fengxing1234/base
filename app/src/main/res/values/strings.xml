@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Base</string>
+    <string name="title_activity_bottom_nav_style">BottomNavStyleActivity</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">仪表盘</string>
+    <string name="title_notifications">通知</string>
 </resources>

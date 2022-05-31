@@ -1,22 +1,57 @@
 //打包发布
 apply plugin: 'maven-publish'
 MavenArtifactid = 'common'
+
+
+//生成文档注释
+task androidJavadocs(type: Javadoc) {
+    failOnError = false
+    source = android.sourceSets.main.java.srcDirs
+    ext.androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    classpath += files(ext.androidJar)
+}
+//将文档打包成jar
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    archiveClassifier.set('javadoc')
+    from androidJavadocs.destinationDir
+}
+//将源码打包，这一点对kotlin来说很重要，否则业务侧无法看到源码
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+configurations.maybeCreate("default")
+def publishArtifact = artifacts.add("default", file('libs/oaid_sdk_1.0.30.aar'))
+
+
 afterEvaluate {
     publishing {
+        // 创建发布任务
         publications {
             release(MavenPublication) {
                 from components.release
                 groupId = MavenGroupId
                 artifactId = MavenArtifactid
+                description 'This is a liberary to test v1.0.0' // 说明描述
                 version = MavenisSnapshot.toBoolean() ? MavenVersion + '-SNAPSHOT' : MavenVersion
-            }
-            debug(MavenPublication) {
-                from components.debug
-                groupId = MavenGroupId
-                artifactId = MavenArtifactid
-                version = MavenisSnapshot.toBoolean() ? MavenVersion + '-SNAPSHOT' : MavenVersion
+                artifact(androidSourcesJar)//将源码打包进aar，如果不需要可以去掉
+                //artifact(androidJavadocsJar)//将注释打包进aar，如果不需要可以去掉
+                ///POM
+//                pom.withXml {
+//                    def dependenciesNode = asNode().appendNode('dependencies')
+//                    configurations.api.allDependencies.each {
+//                        if (it.group != null && (it.name != null || "unspecified".equals(it.name)) && it.version != null) {
+//                            def dependencyNode = dependenciesNode.appendNode('dependency')
+//                            dependencyNode.appendNode('groupId', it.group)
+//                            dependencyNode.appendNode('artifactId', it.name)
+//                            dependencyNode.appendNode('version', it.version)
+//                        }
+//                    }
+//                }
+                ///POM
             }
         }
+
         repositories {
             maven {
                 name = "development"
@@ -29,65 +64,4 @@ afterEvaluate {
             }
         }
     }
-}
-
-
-/////////////////////////////////////////////////3.6版本以前/////////////////////////////////////////////////
-//apply plugin: 'maven'
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            // 是否快照版本
-//            def isSnapShot = MavenisSnapshot.toBoolean()
-//            def versionName = MavenVersion
-//            if (isSnapShot) {
-//                versionName += "-SNAPSHOT"
-//            }
-//            // 组件信息
-//            pom.groupId = MavenGroupId
-//            pom.artifactId = MavenArtifactid
-//            pom.version = versionName
-//
-//            // 快照仓库路径
-//            snapshotRepository(url: uri(MavenSnapshotRepositoryURL)) {
-//                authentication(userName: MavenUserName, password: MavenPassWord)
-//            }
-//            // 发布仓库路径
-//            repository(url: uri(MavenReleaseRepositoryURL)) {
-//                authentication(userName: MavenUserName, password: MavenPassWord)
-//            }
-//
-//            println("###################################"
-//                    + "\nuploadArchives = " + pom.groupId + ":" + pom.artifactId + ":" + pom.version + "." + pom.packaging
-//                    + "\nrepository =" + (isSnapShot ? MavenSnapshotRepositoryURL : MavenReleaseRepositoryURL)
-//                    + "\n###################################"
-//            )
-//        }
-//    }
-//}
-
-
-// type显示指定任务类型或任务, 这里指定要执行Javadoc这个task,这个task在gradle中已经定义
-task androidJavadocs(type: Javadoc) {
-    // 设置源码所在的位置
-    source = android.sourceSets.main.java.sourceFiles
-}
-
-// 生成javadoc.jar
-task androidJavadocsJar(type: Jar) {
-    // 指定文档名称
-    classifier = 'javadoc'
-    from androidJavadocs.destinationDir
-}
-
-// 打包main目录下代码和资源的task，生成sources.jar
-task androidSourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.sourceFiles
-}
-
-//配置需要上传到maven仓库的文件
-artifacts {
-    archives androidSourcesJar
-    archives androidJavadocsJar
 }

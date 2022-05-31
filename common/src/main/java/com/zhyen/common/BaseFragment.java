@@ -1,5 +1,11 @@
 package com.zhyen.common;
 
+import android.content.Context;
+import android.util.Log;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -8,4 +14,14 @@ import androidx.fragment.app.Fragment;
  * description :
  */
 public class BaseFragment extends Fragment {
+
+    protected static final String TAG = BaseFragment.class.getSimpleName();
+    protected OnBackPressedDispatcher onBackPressedDispatcher;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        Log.d(TAG, "onAttach: ");
+        onBackPressedDispatcher = requireActivity().getOnBackPressedDispatcher();
+    }
 }

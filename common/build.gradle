@@ -38,8 +38,9 @@ dependencies {
     //ARouter
 //    api 'com.alibaba:arouter-api:x.x.x'
 //    annotationProcessor 'com.alibaba:arouter-compiler:x.x.x'
-    api project(':base:ui')
-    api project(':base:tool')
-    api project(':base:http')
-    api project(':base:db')
+    api 'com.zhyen.map.base:db:1.0.0'
+    api 'com.zhyen.map.base:http:1.0.0'
+    api 'com.zhyen.map.base:tool:1.0.0'
+    api 'com.zhyen.map.base:ui:1.0.0.1'
+    api 'com.zhyen.map.base:webview:1.0.0'
 }

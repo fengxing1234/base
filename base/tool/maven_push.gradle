@@ -1,0 +1,93 @@
+//打包发布
+apply plugin: 'maven-publish'
+MavenArtifactid = 'tool'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = MavenGroupId+'.base'
+                artifactId = MavenArtifactid
+                version = MavenisSnapshot.toBoolean() ? MavenVersion + '-SNAPSHOT' : MavenVersion
+            }
+//            debug(MavenPublication) {
+//                from components.debug
+//                groupId = MavenGroupId
+//                artifactId = MavenArtifactid+"-debug"
+//                version = MavenisSnapshot.toBoolean() ? MavenVersion + '-SNAPSHOT' : MavenVersion
+//            }
+        }
+        repositories {
+            maven {
+                name = "development"
+                allowInsecureProtocol true
+                url = MavenisSnapshot.toBoolean() ? MavenSnapshotRepositoryURL : MavenReleaseRepositoryURL
+                credentials {
+                    username = MavenUserName
+                    password = MavenPassWord
+                }
+            }
+        }
+    }
+}
+
+
+/////////////////////////////////////////////////3.6版本以前/////////////////////////////////////////////////
+//apply plugin: 'maven'
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            // 是否快照版本
+//            def isSnapShot = MavenisSnapshot.toBoolean()
+//            def versionName = MavenVersion
+//            if (isSnapShot) {
+//                versionName += "-SNAPSHOT"
+//            }
+//            // 组件信息
+//            pom.groupId = MavenGroupId
+//            pom.artifactId = MavenArtifactid
+//            pom.version = versionName
+//
+//            // 快照仓库路径
+//            snapshotRepository(url: uri(MavenSnapshotRepositoryURL)) {
+//                authentication(userName: MavenUserName, password: MavenPassWord)
+//            }
+//            // 发布仓库路径
+//            repository(url: uri(MavenReleaseRepositoryURL)) {
+//                authentication(userName: MavenUserName, password: MavenPassWord)
+//            }
+//
+//            println("###################################"
+//                    + "\nuploadArchives = " + pom.groupId + ":" + pom.artifactId + ":" + pom.version + "." + pom.packaging
+//                    + "\nrepository =" + (isSnapShot ? MavenSnapshotRepositoryURL : MavenReleaseRepositoryURL)
+//                    + "\n###################################"
+//            )
+//        }
+//    }
+//}
+
+
+// type显示指定任务类型或任务, 这里指定要执行Javadoc这个task,这个task在gradle中已经定义
+task androidJavadocs(type: Javadoc) {
+    // 设置源码所在的位置
+    source = android.sourceSets.main.java.sourceFiles
+}
+
+// 生成javadoc.jar
+task androidJavadocsJar(type: Jar) {
+    // 指定文档名称
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+// 打包main目录下代码和资源的task，生成sources.jar
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+
+//配置需要上传到maven仓库的文件
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}

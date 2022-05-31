@@ -3,7 +3,8 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        maven { url "http://127.0.0.1:8081/repository/maven-releases/" }
+        maven { url 'http://127.0.0.1:8081/repository/map-release/' }
+        maven { url 'http://127.0.0.1:8081/repository/map-snapshot/' }
     }
 }
 dependencyResolutionManagement {
@@ -11,7 +12,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url "http://127.0.0.1:8081/repository/map/" }
+        maven { url 'http://127.0.0.1:8081/repository/map-release/' }
+        maven { url 'http://127.0.0.1:8081/repository/map-snapshot/' }
     }
 }
 rootProject.name = "Base"
@@ -21,3 +23,4 @@ include ':base:ui'
 include ':base:tool'
 include ':base:db'
 include ':base:http'
+include ':base:webview'
