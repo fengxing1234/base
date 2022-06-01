@@ -5,9 +5,9 @@
         <!--colorPrimary：基色，跨域整个App各个页面和组件最常用的颜色，常用于应用栏（Appbar）-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <!--colorPrimaryDark：重基色，一般为状态栏的颜色，与应用栏形成对比色-->
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>
         <!--colorAccent:默认选中颜色，各View被选中或突出显示时的颜色；Item或CardView的背景色-->
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorSecondary</item>
         <!--android:windowBackground：界面背景色-->
         <item name="android:windowBackground">@color/light_gray</item>
         <!--android:buttonStyle：按钮样式；其他组件样式也可全局定义-->
@@ -16,11 +16,11 @@
         <!-- 状态栏文字颜色，API23可用-->
         <item name="android:windowLightStatusBar">true</item>
         <!--状态栏颜色-->
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
         <!-- 状态栏透明化 -->
         <!--        <item name="android:windowTranslucentStatus">true</item>-->
         <!--        底部导航栏的颜色-->
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
-
+        <item name="android:navigationBarColor">@color/colorPrimaryVariant</item>
+        <item name="bottomNavigationStyle">@style/BottomNavigationItemViewStyle</item>
     </style>
 </resources>

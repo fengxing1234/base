@@ -1,15 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- 统一字体大小  -->
-    <dimen name="font_larger">22sp</dimen>
-    <dimen name="font_large">18sp</dimen>
-    <dimen name="font_normal">16sp</dimen>
-    <dimen name="font_small">14sp</dimen>
-    <dimen name="font_smaller">12sp</dimen>
-    <dimen name="font_smallest">10sp</dimen>
+    <!--  MD 字体大小  -->
+    <!--
+    12sp 小字提示
+    14sp 正文/按钮文字
+    16sp 小标题
+    20sp Appbar文字
+    24sp 大标题
+    -->
+    <dimen name="H1">96sp</dimen>
+    <dimen name="H2">60sp</dimen>
+    <dimen name="H3">48sp</dimen>
+    <dimen name="H4">34sp</dimen>
+    <dimen name="H5">24sp</dimen>
+    <dimen name="H6">20sp</dimen>
+    <dimen name="Subtitle1">16sp</dimen>
+    <dimen name="Subtitle2">14sp</dimen>
+    <dimen name="Body1">16sp</dimen>
+    <dimen name="Body2">14sp</dimen>
+    <dimen name="BUTTON">14sp</dimen>
+    <dimen name="Caption">12sp</dimen>
+    <dimen name="OverLine">10sp</dimen>
+
+
+    <!--阴影、投影、Z轴-->
+    <dimen name="shadow2">2dp</dimen>
+    <dimen name="shadow6">6dp</dimen>
+    <dimen name="shadow12">12dp</dimen>
+    <dimen name="shadow24">24dp</dimen>
+
+    <!--tab选中项的下划线高度是2dp。-->
+    <dimen name="tabShadow">2dp</dimen>
+    <!--应用栏阴影-->
+    <dimen name="appBarShadow">4dp</dimen>
+    <dimen name="bottomNavShadow">4dp</dimen>
+    <!--按钮默认状态-->
+    <dimen name="buttonStaticShadow">2dp</dimen>
+    <!--按钮按下状态-->
+    <dimen name="buttonPressShadow">8dp</dimen>
+    <!--浮动操作按钮（FAB）静止：6dp 按下：12dp-->
+    <dimen name="FABStaticShadow">6dp</dimen>
+    <dimen name="FABPressShadow">12dp</dimen>
+    <!--    卡片 静止：2dp 浮动状态：8dp-->
+    <dimen name="CardStaticShadow">2dp</dimen>
+    <dimen name="CardFloatShadow">8dp</dimen>
+    <!--    对话框 24dp-->
+    <dimen name="dialogShadow">24dp</dimen>
+    <!--    抽屉式导航 16dp-->
+    <dimen name="drawerShadow">16dp</dimen>
+
+    <!--统一圆角-->
+    <!--卡片圆角-->
+    <dimen name="cardCorners">2dp</dimen>
+
+
+    <!--统一尺寸-->
+
+    <!--状态栏高度-->
+    <dimen name="statusBarHeight">24dp</dimen>
+    <!--appBar最小高度-->
+    <dimen name="appBarMinHeight">56dp</dimen>
+    <!--底部导航栏高度-->
+    <dimen name="bottomNavHeight">48dp</dimen>
+    <!--悬浮按钮常规尺寸-->
+    <dimen name="FABSize">56dp</dimen>
+    <!--悬浮按钮Mini尺寸-->
+    <dimen name="FABMiniSize">40dp</dimen>
+    <!--用户头像Mini尺寸-->
+    <dimen name="profilePictureSize">64dp</dimen>
+    <!--用户头像Mini尺寸-->
+    <dimen name="profilePictureMiniSize">40dp</dimen>
+    <!--小图标的尺寸-->
+    <dimen name="iconSize">24dp</dimen>
+    <!--小图标点击区域-->
+    <dimen name="iconClickArea">48dp</dimen>
+    <!--侧边抽屉到右边屏幕距离-->
+    <dimen name="drawerMarginRight">56dp</dimen>
+
 
     <!-- 统一间距  -->
+
+
+    <!--栅格系统三要素：①列（Columns）②水槽（Gutters）③边距（Margins）-->
+    <!--在360dp宽度的手机设备中，使用4个列-->
+    <!-- 而在600dp宽度的平板电脑中，通过响应式使用8个列-->
+    <!--在宽度为360dp的手机界面中使用16dp的水槽-->
+    <!-- 而在600dp宽度的平板设备中使用26dp的水槽-->
+    <dimen name="GridGutters360">16dp</dimen>
+    <dimen name="GridGutters600">26dp</dimen>
+
+    <!--在360dp的手机设备上使用了16dp的边距-->
+    <!--在600dp的平板电脑设备上使用了24dp的边距-->
+    <!--自定义网格边距8dp-->
+    <dimen name="GridMargins">18dp</dimen>
+    <dimen name="GridMargins360">16dp</dimen>
+    <dimen name="GridMargins600">24dp</dimen>
+    <!--卡片间距-->
+    <dimen name="cardSpace">8dp</dimen>
+    <!--分割线上下留白-->
+    <dimen name="dividerSpaceTopDown">8dp</dimen>
+    <!--分割线左右留白-->
+    <dimen name="dividerSpaceLR">16dp</dimen>
+    <!--屏幕左右两侧边距-->
+    <dimen name="screenSpace">16dp</dimen>
+    <!--文字左侧距离屏幕距离72减去屏幕左侧16间距等于56dp-->
+    <dimen name="textScreenSpace">56dp</dimen>
+    <!--对话框内容边距为24dp-->
+    <dimen name="dialogMarginLR">24dp</dimen>
+
+
     <dimen name="spacing_huge">40dp</dimen>
     <dimen name="spacing_larger">34dp</dimen>
     <dimen name="spacing_large">24dp</dimen>

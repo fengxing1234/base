@@ -1,16 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--    <color name="colorPrimary">#FFBB86FC</color>-->
-    <!--    <color name="colorPrimaryDark">#FF6200EE</color>-->
-    <!--    <color name="purple_200">#FFBB86FC</color>-->
-    <!--    <color name="purple_500">#FF6200EE</color>-->
-    <!--    <color name="purple_700">#FF3700B3</color>-->
-    <!--    <color name="teal_200">#FF03DAC5</color>-->
-    <!--    <color name="teal_700">#FF018786</color>-->
 
-    <color name="colorPrimary">#289ff4</color>
-    <color name="colorPrimaryDark">#0b79b7</color>
-    <color name="colorAccent">@color/white</color>
+    <!--白色主题-->
+    <!--应用的主要品牌颜色，最常用于主题-->
+    <color name="colorPrimary">#6200EE</color>
+    <!--您的主要品牌颜色的较浅/较深变体，在主题中很少使用-->
+    <color name="colorPrimaryVariant">#3700B3</color>
+    <!--用于显示在原色之上的元素的颜色（例如，文本和图标，通常为白色或半- 透明黑色，具体取决于可访问性）-->
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <!--您的应用的辅助品牌颜色，主要用作某些需要突出的小部件的重点-->
+    <color name="colorSecondary">#03DAC6</color>
+    <!--您的辅助品牌颜色的较浅/较深变体，在主题中很少使用-->
+    <color name="colorSecondaryVariant">#018786</color>
+    <!--用于显示在辅助颜色之上的元素的颜色-->
+    <color name="colorOnSecondary">#000000</color>
+    <!--用于错误的颜色（通常是红色阴影）-->
+    <color name="colorError">#C51162</color>
+    <!---->
+    <!--用于显示在错误颜色之上的元素的颜色-->
+    <color name="colorOnError">#FFFFFF</color>
+    <!--用于表面的颜色（即材料“片材”）-->
+    <color name="colorSurface">#000000</color>
+    <!--所有其他屏幕内容背后的颜色-->
+    <color name="colorBackground">#FFFFFF</color>
+    <!--用于显示在背景颜色之上的元素的颜色-->
+    <color name="colorOnBackground">#000000</color>
+
+    <!--分割线-->
+    <color name="divider">#1FFFFFFF</color>
+    <!--禁用状态、提示文字-->
+    <color name="disableText">#42FFFFFF</color>
+    <!--禁用状态、提示文字-->
+    <color name="hintText">#42FFFFFF</color>
+    <!--减淡文字-->
+    <color name="thinText">#8AFFFFFF</color>
+    <!--普通文字-->
+    <color name="defaultText">#DEFFFFFF</color>
+    <!--图标正常状态-->
+    <color name="defaultIcon">#8AFFFFFF</color>
+    <!--图标禁用状态-->
+    <color name="disableIcon">#42FFFFFF</color>
+
+
+    <!--黑色主题-->
+
+    <!--分割线-->
+    <color name="dividerDark">#1FFFFFFF</color>
+    <!--禁用状态、提示文字-->
+    <color name="disableTextDark">#42FFFFFF</color>
+    <!--禁用状态、提示文字-->
+    <color name="hintTextDark">#42FFFFFF</color>
+    <!--减淡文字-->
+    <color name="thinTextDark">#B3FFFFFF</color>
+    <!--普通文字-->
+    <color name="defaultTextDark">#FFFFFFFF</color>
+    <!--图标正常状态-->
+    <color name="defaultIconDark">#FFFFFFFF</color>
+    <!--图标禁用状态-->
+    <color name="disableIconDark">#4DFFFFFF</color>
 
 
     <color name="white">#FFFFFF</color>
