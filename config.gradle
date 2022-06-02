@@ -27,7 +27,7 @@ ext {
             material   : "com.google.android.material:material:$version.material",
 
 
-            ARouter    : "com.alibaba:arouter-compiler:$version.ARouter",
+            ARouter    : "com.alibaba:arouter-api:$version.ARouter",
             ARouterAnno: "com.alibaba:arouter-compiler:$version.ARouter",
 
 

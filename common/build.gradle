@@ -53,6 +53,6 @@ dependencies {
     api rootProject.ext.library.webview
 
     //ARouter
-//    api rootProject.ext.library.ARouter
-//    annotationProcessor rootProject.ext.library.ARouterAnno
+    api rootProject.ext.library.ARouter
+    annotationProcessor rootProject.ext.library.ARouterAnno
 }
