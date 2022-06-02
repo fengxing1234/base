@@ -25,8 +25,12 @@ ext {
     library = [
             appcompat  : "androidx.appcompat:appcompat:$version.appcompat",
             material   : "com.google.android.material:material:$version.material",
+
+
             ARouter    : "com.alibaba:arouter-compiler:$version.ARouter",
             ARouterAnno: "com.alibaba:arouter-compiler:$version.ARouter",
+
+
             db         : "com.zhyen.map.base:db:$version.db",
             ui         : "com.zhyen.map.base:ui:$version.ui",
             http       : "com.zhyen.map.base:http:$version.http",

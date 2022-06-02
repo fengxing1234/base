@@ -1,4 +1,4 @@
-//打包发布
+//打包发布 在 AGP 8.0 版本之后会失效,
 apply plugin: 'maven-publish'
 MavenArtifactid = 'common'
 

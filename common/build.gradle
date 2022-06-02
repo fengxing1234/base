@@ -42,8 +42,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //AndroidX核心资源库
-    api 'androidx.appcompat:appcompat:1.4.1'
-    api 'com.google.android.material:material:1.6.0'
+    api rootProject.ext.library.appcompat
+    api rootProject.ext.library.material
 
     //基础模块
     api rootProject.ext.library.db
