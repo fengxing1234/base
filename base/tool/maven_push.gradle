@@ -8,7 +8,7 @@ afterEvaluate {
                 from components.release
                 groupId = MavenGroupId+'.base'
                 artifactId = MavenArtifactid
-                version = MavenisSnapshot.toBoolean() ? MavenVersion + '-SNAPSHOT' : MavenVersion
+                version = MavenisSnapshot.toBoolean() ? ToolMavenVersion + '-SNAPSHOT' : ToolMavenVersion
             }
 //            debug(MavenPublication) {
 //                from components.debug

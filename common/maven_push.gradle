@@ -33,7 +33,7 @@ afterEvaluate {
                 groupId = MavenGroupId
                 artifactId = MavenArtifactid
                 description 'This is a liberary to test v1.0.0' // 说明描述
-                version = MavenisSnapshot.toBoolean() ? MavenVersion + '-SNAPSHOT' : MavenVersion
+                version = MavenisSnapshot.toBoolean() ? CommonMavenVersion + '-SNAPSHOT' : CommonMavenVersion
                 artifact(androidSourcesJar)//将源码打包进aar，如果不需要可以去掉
                 //artifact(androidJavadocsJar)//将注释打包进aar，如果不需要可以去掉
                 ///POM
