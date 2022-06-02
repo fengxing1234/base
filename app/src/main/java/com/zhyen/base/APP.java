@@ -1,7 +1,6 @@
 package com.zhyen.base;
 
 import android.app.Application;
-import android.support.multidex.MultiDex;
 
 /**
  * author : fengxing
@@ -12,6 +11,5 @@ public class APP extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        MultiDex.install(this);
     }
 }
