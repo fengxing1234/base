@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    private static final String TAG = BaseActivity.class.getSimpleName();
+    protected static final String TAG = BaseActivity.class.getSimpleName();
     protected boolean isThemeDefault = true;
 
     @Override

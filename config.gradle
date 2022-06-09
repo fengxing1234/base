@@ -19,7 +19,7 @@ ext {
             ARouter  : "1.5.2",
             appcompat: "1.4.1",
             material : "1.6.0",
-
+            Gson     : "2.9.0",
     ]
 
     library = [
@@ -29,6 +29,9 @@ ext {
 
             ARouter    : "com.alibaba:arouter-api:$version.ARouter",
             ARouterAnno: "com.alibaba:arouter-compiler:$version.ARouter",
+
+            Gson       : "com.google.code.gson:gson:$version.Gson",
+
 
 
             db         : "com.zhyen.map.base:db:$version.db",

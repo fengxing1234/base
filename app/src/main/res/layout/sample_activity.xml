@@ -49,4 +49,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_progress_style" />
 
+    <Button
+        android:id="@+id/btn_dialog_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="对话框样式"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_progress_style" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

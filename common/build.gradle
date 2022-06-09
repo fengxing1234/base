@@ -55,4 +55,7 @@ dependencies {
     //ARouter
     api rootProject.ext.library.ARouter
     annotationProcessor rootProject.ext.library.ARouterAnno
+
+    //Gson
+    api rootProject.ext.library.Gson
 }
