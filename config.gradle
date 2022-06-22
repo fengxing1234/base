@@ -41,3 +41,195 @@ ext {
             webview    : "com.zhyen.map.base:webview:$version.webview",
     ]
 }
+gradle.settingsEvaluated {
+    println("Settings 配置完毕")
+}
+
+// 所有 Project 对象创建（注意：此时 build.gradle 中的配置代码还未执行）
+gradle.projectsLoaded {
+    println("所有 Project 对象创建（注意：此时 build.gradle 中的配置代码还未执行）")
+}
+
+// 执行 build.gradle 前
+project.beforeEvaluate {
+    println "执行 build.gradle 前$it"
+}
+
+project.afterEvaluate {
+    println "执行 build.gradle 后 $it"
+}
+// 执行 build.gradle 前
+gradle.beforeProject { project ->
+    println "执行 build.gradle 前 $project"
+}
+
+// 执行 build.gradle 后
+gradle.afterProject { project ->
+    println "执行 build.gradle 后 $project"
+    // 配置后，无论成功或失败
+    if (project.state.failure) {
+        println "Evaluation of $project FAILED"
+    } else {
+        println "Evaluation of $project succeeded"
+    }
+}
+
+// 依赖关系解析完毕
+gradle.addListener(new DependencyResolutionListener() {
+    @Override
+    void beforeResolve(ResolvableDependencies dependencies) {
+        println "依赖关系解析完毕 前"
+    }
+
+    @Override
+    void afterResolve(ResolvableDependencies dependencies) {
+        println "依赖关系解析完毕 后"
+    }
+})
+
+// Task DAG 构造完毕
+gradle.taskGraph.whenReady {
+    println "Task DAG 构造完毕"
+}
+
+// 与 gradle.taskGraph.whenReady 等价
+gradle.addListener(new TaskExecutionGraphListener() {
+    @Override
+    void graphPopulated(TaskExecutionGraph graph) {
+        println "与 gradle.taskGraph.whenReady 等价"
+    }
+})
+
+// 所有 Project 的 build.gradle 执行完毕
+gradle.projectsEvaluated {
+    println "所有 Project 的 build.gradle 执行完毕"
+}
+
+gradle.addListener(new TaskExecutionListener() {
+
+    // 执行 Task 前
+    @Override
+    void beforeExecute(Task task) {
+        println "执行 Task 前 task = ${task.name}"
+    }
+
+    // 执行 Task 后
+    @Override
+    void afterExecute(Task task, TaskState state) {
+        println "执行 Task 前 task = ${task.name} state = ${state.toString()}"
+    }
+})
+
+gradle.addListener(new TaskActionListener() {
+
+    // 开始执行 Action 列表前，回调时机略晚于 TaskExecutionListener#beforeExecute
+    @Override
+    void beforeActions(Task task) {
+        println "task = ${task.name} 开始执行 Action 列表前，回调时机略晚于 TaskExecutionListener#beforeExecute"
+    }
+
+    // 执行 Action 列表完毕，回调时机略早于 TaskExecutionListener#afterExecute
+    @Override
+    void afterActions(Task task) {
+        println "task = ${task.name} 执行 Action 列表完毕，回调时机略早于 TaskExecutionListener#afterExecute"
+    }
+})
+
+// 执行 Task 前
+gradle.taskGraph.beforeTask { Task task ->
+    println "执行 Task 前 ${task.name}"
+}
+
+// 执行 Task 后
+gradle.taskGraph.afterTask { Task task, TaskState state ->
+    println "执行 Task 后  ${task.name} state ${task.state}"
+    if (state.failure) {
+        println "${task.name} state ${task.state} FAILED"
+    } else {
+        println "${task.name} state ${task.state} done"
+    }
+}
+
+tasks.whenTaskAdded { task ->
+
+    println "TaskContainer 接口提供了监听 Task 添加的方法，可以在 Task 添加到 Project 时收到回调："
+}
+
+gradle.buildFinished {
+    println "当所有 Task 执行完毕，意味着构建结束："
+}
+
+
+/**
+ * Project 可以理解为模块的构建管理器，在初始化阶段，Gradle 会为每个模块的 build.gradle 文件实例化一个接口对象。在 .gradle 脚本中编写的代码，本质上可以理解为是在一个 Project 子类中编写的。
+ *
+ * Project API：
+ * getProject()： 返回当前 Project；
+ * getParent()： 返回父 Project，如果在工程 RootProject 中调用，则会返回 null；
+ * getRootProject()： 返回工程 RootProject；
+ * getAllProjects()： 返回一个 Project Set 集合，包含当前 Project 与所有子 Project；
+ * getSubprojects()： 返回一个 Project Set 集合，包含所有子 Project；
+ * project(String)： 返回指定 Project，不存在时抛出 UnKnownProjectException；
+ * findProject(String)： 返回指定 Project，不存在时返回 null；
+ * allProjects(Closure)： 为当前 Project 以及所有子 Project 增加配置；
+ * subprojects(Closure)： 为所有子 Project 增加配置。
+ *
+ * Project 属性:
+ * hasProperty(String)： 判断是否存在指定属性名；
+ * property(Stirng)： 获取属性值，如果属性不存在则抛出 MissingPropertyException；
+ * findProperty(String)： 获取属性值，如果属性不存在则返回 null；
+ * setProperty(String, Object)： 设置属性值，如果属性不存在则抛出 MissingPropertyException。
+ *
+ * Project 文件 API
+ * getRootDir()： Project 的根目录（不是工程根目录）
+ * getProjectDir()： 包含 build 文件夹的项目目录
+ * getBuildDir()： build 文件夹目录
+ * File file(Object path)： 获取单个文件，相对位置从当前 Project 目录开始 ConfigurableFileCollection files(Object... paths)： 获取多个文件，相对位置从当前 Project 目录开始
+ * copy(Closure)： 文件拷贝，参数闭包用于配置 CodeSpec 对象
+ * fileTree(Object baseDir)： 将指定目录转化为文件树，再进行遍历操作
+ *
+ *
+ * 属性匹配优先级:
+ * 自有属性、Extension 属性、ext 属性、Task
+ *
+ * Extension 扩展:
+ * Extension 扩展是插件为外部构建脚本提供的配置项，用于支持外部自定义插件的工作方式，其实就是一个对外开放的 Java Bean 或 Groovy Bean。例如，我们熟悉的 android{} 就是 Android Gradle Plugin 提供的扩展。
+ *
+ * ext 属性:
+ * Gradle 为 Project 和 Task 提供了 ext 命名空间，用于定义额外属性。如前所述，子 Project 会继承 父 Project 定义的 ext 属性，但是只读的。我们经常会在 Root Project 中定义 ext 属性，而在子 Project 中可以直接复用属性值
+ *
+ * Gradle API
+ * Project 的构建逻辑由一系列 Task 的组成，每个 Task 负责完成一个基本的工作，例如 Javac 编译 Task、资源编译 Task、Lint 检查 Task，签名 Task等。在构建配置阶段，Gradle 会根据 Task 的依赖关系构造一个有向无环图，以便在执行阶段按照依赖关系执行 Task
+ * task MyTask(group: "MyGroup") {} 创建Task任务
+ * project.tasks.create(name: "MyTask") {} 创建Task任务
+ * Task getByName(String)： 获取 Task，如果 Task 不存在则抛出 UnKnownDomainObjectException；
+ * Task findByName(String)： 获取 Task，如果 Task 不存在则返回 null。
+ * task MyTask(group: "MyGroup") 设置Task属性
+ *
+ * Gradle 属性
+ * name:Task标识符，在定义 Task 时指定
+ * group:Task所属的组
+ * description:Task的描述信息
+ * type:Task类型，默认为 DefaultTask
+ * actions:动作列表
+ * dependsOn:依赖列表
+ *
+ * Task Action：动作
+ * doFirst(Closure)： 在 Action 列表头部添加一个 Action；
+ * doLast(Closure)： 在 Action 列表尾部添加一个 Action。
+ * onlyIf{}： 闭包会在即将执行 Task 之前执行，闭包返回值决定了是否执行 Task；
+ * enabled 属性： Task 的 enabled 属性默认为 true，设置为 false 表示无效任务，不需要执行
+ * StopActionException： 中断当前 Action，并继续当前 Task 的下一个 Action；
+ * StopExecutionException： 中断当前 Task，并继续 Task 依赖树上的下一个 Action。
+ * timeouts 属性： 当 Task 执行时间到达 timeouts 超时时间时，执行线程会收到一个中断信号，可以借此许控制 Task 的执行时间（前提是 Task 要响应中断信号）。
+ *
+ * Task 依赖关系
+ * dependsOn 强依赖： Task 通过 dependsOn 属性建立强依赖关系，可以直接通过 dependsOn 属性设置依赖列表，也可以通过 dependsOn() 方法添加一个依赖；
+ * 输入输出隐式依赖： 通过建立 Task 之间的输入和输出关系，也会隐式建立依赖关系。例如 Transform Task 之间就是通过输入输出建立的依赖关系。
+ * mustRunAfter 强制顺序： 指定强制要求的任务执行顺序；
+ * shouldRunAfter 非强制顺序： 指定非强制的任务执行顺序，在两种情况下会放弃此规则：1、该规则造成环形顺序；2、并行执行并且任务的所有依赖项都已经完成。
+ *
+ * Finalizer Task
+ * 给一个 Task 添加 Finalizer 终结器任务后，无论 Task 执行成功还是执行失败，都会执行终结器，这对于需要在 Task 执行完毕后清理资源的情况非常有用。例如：taskX finalizedBy taskY
+ *
+ */

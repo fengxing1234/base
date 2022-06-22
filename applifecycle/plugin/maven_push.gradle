@@ -1,0 +1,23 @@
+//打包发布
+apply plugin: 'maven-publish'
+MavenArtifactid = 'applifecycle-plugin'
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId = MavenGroupId + '.applifecycle'
+            artifactId = MavenArtifactid
+            version = MavenisSnapshot.toBoolean() ? LifecycleVerion + '-SNAPSHOT' : LifecycleVerion
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            allowInsecureProtocol true
+            url = MavenisSnapshot.toBoolean() ? MavenSnapshotRepositoryURL : MavenReleaseRepositoryURL
+            credentials {
+                username = MavenUserName
+                password = MavenPassWord
+            }
+        }
+    }
+}

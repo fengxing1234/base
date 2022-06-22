@@ -1,21 +1,21 @@
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
-        maven { url 'http://127.0.0.1:8081/repository/map-release/' }
-        maven { url 'http://127.0.0.1:8081/repository/map-snapshot/' }
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'http://127.0.0.1:8081/repository/map-release/' }
-        maven { url 'http://127.0.0.1:8081/repository/map-snapshot/' }
-    }
-}
+//pluginManagement {
+//    repositories {
+//        gradlePluginPortal()
+//        google()
+//        mavenCentral()
+//        maven { url 'http://127.0.0.1:8081/repository/map-release/' }
+//        maven { url 'http://127.0.0.1:8081/repository/map-snapshot/' }
+//    }
+//}
+//dependencyResolutionManagement {
+//    //repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositories {
+//        google()
+//        mavenCentral()
+//        maven { url 'http://127.0.0.1:8081/repository/map-release/' }
+//        maven { url 'http://127.0.0.1:8081/repository/map-snapshot/' }
+//    }
+//}
 rootProject.name = "Base"
 include ':app'
 include ':common'
@@ -24,3 +24,7 @@ include ':base:tool'
 include ':base:db'
 include ':base:http'
 include ':base:webview'
+include ':applifecycle:compiler'
+include ':applifecycle:anno'
+include ':applifecycle:core'
+include ':applifecycle:plugin'

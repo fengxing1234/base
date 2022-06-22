@@ -1,0 +1,29 @@
+apply plugin: 'java-library'
+apply plugin: 'groovy'
+apply from: 'maven_push.gradle'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation gradleApi()
+    implementation localGroovy()
+
+    implementation 'com.android.tools.build:transform-api:1.5.0'
+    implementation 'com.android.tools.build:gradle:3.6.4'
+}
+//指定源码/资源路径
+sourceSets {
+    main {
+        groovy {
+            srcDir 'src/main/groovy'
+        }
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
